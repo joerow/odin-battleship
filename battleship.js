@@ -1,7 +1,7 @@
 export class Ship {
   constructor(length) {
     this.length = length;
-    let times_hit = 0;
+    this.times_hit = 0;
   }
 
   hit() {
