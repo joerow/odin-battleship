@@ -25,3 +25,13 @@ test("Sink a ship", () => {
   expect(ship.times_hit).toBe(2);
   expect(ship.isSunk()).toBe(true);
 });
+
+test("create a gameboard", () => {
+  const board = new Gameboard();
+  board.all_valid_coordinates();
+});
+
+// test("test a valid coordinate", () => {
+//   const board = new Gameboard();
+//   expect(board.is_valid_coordinates({ x: 1, y: 1 })).toBe(true);
+// });
