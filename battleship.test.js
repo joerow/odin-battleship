@@ -31,7 +31,20 @@ test("create a gameboard", () => {
   board.all_valid_coordinates();
 });
 
-// test("test a valid coordinate", () => {
+test("test a valid coordinate", () => {
+  const board = new Gameboard();
+  let coordinate = { x: 1, y: 2 };
+  expect(board.is_valid_coordinate(coordinate)).toBe(true);
+});
+
+test("test an invalid coordinate", () => {
+  const board = new Gameboard();
+  let coordinate = { x: 1, y: 12 };
+  expect(board.is_valid_coordinate(coordinate)).toBe(false);
+});
+
+// test("place a valid horizontal ship", () => {
 //   const board = new Gameboard();
-//   expect(board.is_valid_coordinates({ x: 1, y: 1 })).toBe(true);
+//   let coordinate = { x: 0, y: 1 };
+//   board.place_ship(3, coordinate, "horizontal");
 // });

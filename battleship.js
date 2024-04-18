@@ -15,23 +15,85 @@ export class Ship {
 
 export class Gameboard {
   constructor() {
-    this.size = 3;
+    this.size = 10;
     this.coordinates = [];
-    for (let x = 0; x < this.size; x++) {
-      for (let y = 0; y < this.size; y++) {
-        this.coordinates.push({ x: x, y: y });
+    for (let i = 0; i < this.size; i++) {
+      for (let j = 0; j < this.size; j++) {
+        this.coordinates.push({ x: i, y: j });
       }
     }
+    this.ship_coordinates = [];
   }
 
   all_valid_coordinates() {
-    console.log(this.coordinates);
+    return this.coordinates;
   }
 
-  // is_valid_coordinates({ input }) {
-  //   console.log(input);
-  //   let valid = this.coordinates.includes({ x: x, y: y });
-  //   console.log(valid);
+  is_valid_coordinate({ x, y }) {
+    // Use find method to check if the coordinates exist in the array
+    return (
+      this.coordinates.find((coord) => coord.x === x && coord.y === y) !==
+      undefined
+    );
+  }
+
+  // is_ship_coordinate({ x, y }) {
+  //   // Use find method to check if the coordinates exist in the array
+  //   return (
+  //     this.ship_coordinates.find((coord) => coord.x === x && coord.y === y) !==
+  //     undefined
+  //   );
+  // }
+
+  // place_ship(ship_length, ship_start, orientation) {
+  //   try {
+  //     // check if the ship start location is valid
+  //     if (!this.is_valid_coordinate(ship_start)) {
+  //       throw "not a valid starting coordinate";
+  //     }
+
+  //     // check if all ship locations are valid for orientation
+  //     let ship_pieces = [];
+
+  //     // generate the horizontal ship pieces
+  //     switch (orientation) {
+  //       case "horizontal":
+  //         for (let index = 0; index < ship_length; index++) {
+  //           let ship_part = { x: ship_start.x + index, y: ship_start.y };
+  //           ship_pieces.push(ship_part);
+  //         }
+  //         break;
+  //       // generate the vertical ship pieces
+  //       case "vertical":
+  //         for (let index = 0; index < ship_length; index++) {
+  //           let ship_part = { x: ship_start.x, y: ship_start.y + index };
+  //           ship_pieces.push(ship_part);
+  //         }
+  //       default:
+  //         break;
+  //     }
+
+  //     // check if any ship pieces would be invalid
+  //     ship_pieces.forEach((ship_part) => {
+  //       try {
+  //         if (!this.is_valid_coordinate(ship_part)) {
+  //           throw "not a valid placement";
+  //         }
+  //         if (this.is_ship_coordinate(ship_part)) {
+  //           throw "would cause ship overlap";
+  //         }
+  //       } catch (error) {
+  //         console.log("1:" + error);
+  //         throw error;
+  //       }
+  //     });
+
+  //     //store the ship pieces in the gameboard
+  //     this.ship_coordinates.push(ship_pieces);
+  //     console.log(this.ship_coordinates);
+  //   } catch (error) {
+  //     console.log("2:" + error);
+  //   }
   // }
 }
 
