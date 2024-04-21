@@ -1,9 +1,5 @@
 import { expect, test } from "vitest";
-import { sum, Ship, Gameboard } from "./battleship";
-
-test("adds 1 + 2 to equal 3", () => {
-  expect(sum(1, 2)).toBe(3);
-});
+import { Ship, Gameboard } from "./battleship";
 
 test("Create a ship with a length", () => {
   const ship = new Ship(5);
@@ -43,8 +39,28 @@ test("test an invalid coordinate", () => {
   expect(board.is_valid_coordinate(coordinate)).toBe(false);
 });
 
-// test("place a valid horizontal ship", () => {
-//   const board = new Gameboard();
-//   let coordinate = { x: 0, y: 1 };
-//   board.place_ship(3, coordinate, "horizontal");
-// });
+test("place a valid horizontal ship", () => {
+  const board = new Gameboard();
+  let coordinate = { x: 1, y: 1 };
+  board.place_ship(3, coordinate, "horizontal");
+});
+
+test("place an invalid horizontal ship - expect ship overlap error", () => {
+  const board = new Gameboard();
+  let coordinate = { x: 0, y: 1 };
+  let coordinate2 = { x: 2, y: 1 };
+  board.place_ship(3, coordinate, "horizontal");
+  // expect error "would cause ship overlap"
+  expect(() => board.place_ship(3, coordinate2, "horizontal")).toThrowError(
+    "would cause ship overlap"
+  );
+});
+
+test("place an invalid horizontal ship - expect ship exceeds gameboard", () => {
+  const board = new Gameboard();
+  let coordinate = { x: 9, y: 1 };
+  // expect error "would cause ship overlap"
+  expect(() => board.place_ship(3, coordinate, "horizontal")).toThrowError(
+    "not a valid placement: exceeds gameboard"
+  );
+});
