@@ -64,3 +64,24 @@ test("place an invalid horizontal ship - expect ship exceeds gameboard", () => {
     "not a valid placement: exceeds gameboard"
   );
 });
+
+test("place an invalid vertical ship - expect ship exceeds gameboard", () => {
+  const board = new Gameboard();
+  let coordinate = { x: 1, y: 9 };
+  // expect error "would cause ship overlap"
+  expect(() => board.place_ship(3, coordinate, "vertical")).toThrowError(
+    "not a valid placement: exceeds gameboard"
+  );
+});
+
+test("hit a ship place on the board", () => {
+  const board = new Gameboard();
+  let coordinate = { x: 0, y: 1 };
+  let coordinate2 = { x: 5, y: 1 };
+  let miss_coordinate = { x: 7, y: 1 };
+  board.place_ship(3, coordinate, "horizontal");
+  board.place_ship(2, coordinate2, "horizontal");
+  board.receive_attack(coordinate);
+  board.receive_attack(miss_coordinate);
+  expect(board.ships_on_gameboard[0].times_hit).toBe(1);
+});

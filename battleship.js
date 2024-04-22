@@ -2,6 +2,7 @@ export class Ship {
   constructor(length) {
     this.length = length;
     this.times_hit = 0;
+    this.coordinates = [];
   }
 
   hit() {
@@ -23,10 +24,31 @@ export class Gameboard {
       }
     }
     this.ship_coordinates = [];
+    this.missed_attacks = [];
+    this.ships_on_gameboard = [];
   }
 
   all_valid_coordinates() {
     return this.coordinates;
+  }
+
+  receive_attack(shot) {
+    let hit = false;
+    this.ships_on_gameboard.forEach((ship) => {
+      if (hit) {
+        return;
+      }
+      ship.coordinates.forEach((ship_coordinate) => {
+        if (ship_coordinate.x == shot.x && ship_coordinate.y == shot.y) {
+          ship.hit();
+          hit = true;
+        } else {
+        }
+      });
+    });
+    if (!hit) {
+      this.missed_attacks.push(shot);
+    }
   }
 
   is_valid_coordinate({ x, y }) {
@@ -80,13 +102,19 @@ export class Gameboard {
             throw new Error("not a valid placement: exceeds gameboard");
           }
           if (this.is_ship_coordinate(ship_part)) {
-            console.log("inner:");
             throw new Error("would cause ship overlap");
           }
         } catch (Error) {
           throw Error;
         }
       });
+
+      // Create the ship and store the coordinates for it
+      let ship = new Ship(ship_length);
+      ship_pieces.forEach((ship_part) => {
+        ship.coordinates.push(ship_part);
+      });
+      this.ships_on_gameboard.push(ship);
 
       //store the ship pieces in the gameboard
       ship_pieces.forEach((ship_part) => {
