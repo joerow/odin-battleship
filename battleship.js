@@ -50,6 +50,8 @@ export class Gameboard {
     if (!hit) {
       this.missed_attacks.push(shot);
     }
+
+    // determines if the shot ended the game
     this.ships_on_gameboard.forEach((ship) => {
       this.game_over = true;
       if (!ship.isSunk()) {
