@@ -78,10 +78,19 @@ test("hit a ship place on the board", () => {
   const board = new Gameboard();
   let coordinate = { x: 0, y: 1 };
   let coordinate2 = { x: 5, y: 1 };
-  let miss_coordinate = { x: 7, y: 1 };
   board.place_ship(3, coordinate, "horizontal");
   board.place_ship(2, coordinate2, "horizontal");
   board.receive_attack(coordinate);
-  board.receive_attack(miss_coordinate);
   expect(board.ships_on_gameboard[0].times_hit).toBe(1);
+});
+
+test("Count missed attacks", () => {
+  const board = new Gameboard();
+  let coordinate = { x: 0, y: 1 };
+  let miss_coordinate1 = { x: 7, y: 1 };
+  let miss_coordinate2 = { x: 7, y: 2 };
+  board.place_ship(3, coordinate, "horizontal");
+  board.receive_attack(miss_coordinate1);
+  board.receive_attack(miss_coordinate2);
+  expect(board.missed_attacks.length).toBe(2);
 });
