@@ -34,6 +34,7 @@ export class Gameboard {
   }
 
   receive_attack(shot) {
+    // TODO add a check here that it is a valid coordinate or throw error
     let hit = false;
     this.ships_on_gameboard.forEach((ship) => {
       if (hit) {
@@ -50,7 +51,7 @@ export class Gameboard {
     if (!hit) {
       this.missed_attacks.push(shot);
     }
-
+    this.remove_from_valid_coordinates(shot);
     // determines if the shot ended the game
     this.ships_on_gameboard.forEach((ship) => {
       this.game_over = true;
@@ -65,6 +66,12 @@ export class Gameboard {
     return (
       this.coordinates.find((coord) => coord.x === x && coord.y === y) !==
       undefined
+    );
+  }
+
+  remove_from_valid_coordinates(coordinate) {
+    this.coordinates = this.coordinates.filter(
+      (item) => !(item.x === coordinate.x && item.y === coordinate.y)
     );
   }
 

@@ -109,3 +109,13 @@ test("Sink all ships and report", () => {
   board.receive_attack(coordinateB2);
   expect(board.game_over).toBe(true);
 });
+
+test("Remove attack coordinates from future valid moves", () => {
+  const board = new Gameboard();
+  let coordinate = { x: 0, y: 1 };
+  let coordinate2 = { x: 0, y: 0 };
+  board.receive_attack(coordinate);
+  board.receive_attack(coordinate2);
+  console.log(board.all_valid_coordinates());
+  expect(board.is_valid_coordinate(coordinate)).toBe(false);
+});
