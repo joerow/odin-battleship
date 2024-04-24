@@ -18,6 +18,7 @@ export class Gameboard {
   constructor() {
     this.size = 10;
     this.coordinates = [];
+    this.game_over = false;
     for (let i = 0; i < this.size; i++) {
       for (let j = 0; j < this.size; j++) {
         this.coordinates.push({ x: i, y: j });
@@ -49,6 +50,12 @@ export class Gameboard {
     if (!hit) {
       this.missed_attacks.push(shot);
     }
+    this.ships_on_gameboard.forEach((ship) => {
+      this.game_over = true;
+      if (!ship.isSunk()) {
+        this.game_over = false;
+      }
+    });
   }
 
   is_valid_coordinate({ x, y }) {

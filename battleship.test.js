@@ -94,3 +94,18 @@ test("Count missed attacks", () => {
   board.receive_attack(miss_coordinate2);
   expect(board.missed_attacks.length).toBe(2);
 });
+
+test("Sink all ships and report", () => {
+  const board = new Gameboard();
+  let coordinateA1 = { x: 0, y: 1 };
+  let coordinateA2 = { x: 1, y: 1 };
+  let coordinateB1 = { x: 0, y: 2 };
+  let coordinateB2 = { x: 1, y: 2 };
+  board.place_ship(2, coordinateA1, "horizontal");
+  board.receive_attack(coordinateA1);
+  board.receive_attack(coordinateA2);
+  board.place_ship(2, coordinateB1, "horizontal");
+  board.receive_attack(coordinateB1);
+  board.receive_attack(coordinateB2);
+  expect(board.game_over).toBe(true);
+});
