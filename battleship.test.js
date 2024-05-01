@@ -107,7 +107,7 @@ test("Sink all ships and report", () => {
   board.place_ship(2, coordinateB1, "horizontal");
   board.receive_attack(coordinateB1);
   board.receive_attack(coordinateB2);
-  expect(board.game_over).toBe(true);
+  expect(board.all_ships_sunk).toBe(true);
 });
 
 test("Remove attack coordinates from future valid moves", () => {

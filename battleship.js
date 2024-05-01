@@ -18,7 +18,7 @@ export class Gameboard {
   constructor() {
     this.size = 10;
     this.coordinates = [];
-    this.game_over = false;
+    this.all_ships_sunk = false;
     for (let i = 0; i < this.size; i++) {
       for (let j = 0; j < this.size; j++) {
         this.coordinates.push({ x: i, y: j });
@@ -54,9 +54,9 @@ export class Gameboard {
     this.remove_from_valid_coordinates(shot);
     // determines if the shot ended the game
     this.ships_on_gameboard.forEach((ship) => {
-      this.game_over = true;
+      this.all_ships_sunk = true;
       if (!ship.isSunk()) {
-        this.game_over = false;
+        this.all_ships_sunk = false;
       }
     });
   }
