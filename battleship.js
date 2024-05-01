@@ -14,6 +14,13 @@ export class Ship {
   }
 }
 
+export class Player {
+  constructor(type) {
+    this.type = type;
+    this.gameboard = new Gameboard();
+  }
+}
+
 export class Gameboard {
   constructor() {
     this.size = 10;

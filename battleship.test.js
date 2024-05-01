@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { Ship, Gameboard } from "./battleship";
+import { Ship, Gameboard, Player } from "./battleship";
 
 test("Create a ship with a length", () => {
   const ship = new Ship(5);
@@ -116,6 +116,11 @@ test("Remove attack coordinates from future valid moves", () => {
   let coordinate2 = { x: 0, y: 0 };
   board.receive_attack(coordinate);
   board.receive_attack(coordinate2);
-  console.log(board.all_valid_coordinates());
   expect(board.is_valid_coordinate(coordinate)).toBe(false);
+});
+
+test("check player is created with own gameboard", () => {
+  const player = new Player("player");
+  let coordinate = { x: 0, y: 1 };
+  expect(player.gameboard.is_valid_coordinate(coordinate)).toBe(true);
 });
