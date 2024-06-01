@@ -15,14 +15,14 @@ export class Ship {
 }
 
 export class Player {
-  constructor(type) {
+  constructor(type, dev) {
     this.type = type;
-    this.gameboard = new Gameboard();
+    this.gameboard = new Gameboard(dev);
   }
 }
 
 export class Gameboard {
-  constructor() {
+  constructor(dev) {
     this.size = 10;
     this.coordinates = [];
     this.all_ships_sunk = false;
@@ -34,6 +34,14 @@ export class Gameboard {
     this.ship_coordinates = [];
     this.missed_attacks = [];
     this.ships_on_gameboard = [];
+
+    if (dev === 1) {
+      console.log("dev = 1");
+    } else if (dev === 2) {
+      console.log("dev = 2");
+    } else {
+    }
+    console.log("gameboard created");
   }
 
   all_valid_coordinates() {

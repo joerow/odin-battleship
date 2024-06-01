@@ -14,4 +14,13 @@ let message = buildElement(
 );
 app.appendChild(message);
 
-message.textContent = "new message";
+message.textContent = "Let's play";
+
+let newGame = buildElement("button", "new-game", "", "new game");
+app.appendChild(newGame);
+newGame.onclick = function () {
+  let p1 = new Player("User", 1);
+  let p2 = new Player("CPU", 2);
+  newGame.style.display = "none";
+  message.textContent = "Let's go";
+};
